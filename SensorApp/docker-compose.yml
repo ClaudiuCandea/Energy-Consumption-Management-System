@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  user_app:
+    container_name: sensor_app
+    image: candea/sensor_app:1.0.0
+    build: .
+    ports:
+      - "8083:8083"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    external: true

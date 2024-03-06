@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Electrical Management</span>
+      <span class="example-spacer"></span>
+      <button mat-button (click)="toUsers()" *ngIf="authService.getRole()=='ADMIN'">Users</button>
+      <button mat-button (click)="toDevices()" *ngIf="authService.getRole()=='ADMIN'">Devices</button>
+      <button mat-button (click)="logOut()">LogOut</button>
+      <button mat-button (click)="createDevice()" *ngIf="authService.getRole()=='ADMIN'">Create Device</button>
+      <button mat-button (click)="toSensorGenerator()" *ngIf="authService.getRole()=='ADMIN'">Sensor Generator</button>
+      <button mat-button (click)="goToChat()">Chat</button>
+    </mat-toolbar-row>
+  </mat-toolbar>

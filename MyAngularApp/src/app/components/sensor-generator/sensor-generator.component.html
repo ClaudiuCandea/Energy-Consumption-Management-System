@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<mat-card class="card">
+    <div class="form-component">
+        <h1>Generate a new Sensor</h1>
+        <form #generatorForm="ngForm" (ngSubmit)="onSubmit(generatorForm)">
+            <mat-form-field>
+                <mat-label>Device id</mat-label>
+                <mat-select name="deviceId" required ngModel>
+                    <mat-option *ngFor="let device of devices" [value]="device.id">{{device.id}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button type="submit" [disabled]="generatorForm.form.invalid"  color="primary">Generate</button>
+        </form> 
+    </div>
+</mat-card>

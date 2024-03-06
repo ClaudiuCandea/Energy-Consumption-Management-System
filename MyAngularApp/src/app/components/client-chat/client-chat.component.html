@@ -1,0 +1,38 @@
+<h1>Chat with the admin</h1>
+<div class="mesgs">
+    <div class="msg_history">
+      <li class="message" *ngFor="let message of messages">
+        <div
+          *ngIf="
+            message.sender !== 'CLIENT';
+            then incoming_msg;
+            else outgoing_msg
+          "
+        ></div>
+        <ng-template #incoming_msg>
+          <app-received-message [message]="message"></app-received-message>
+        </ng-template>
+        <ng-template #outgoing_msg>
+          <div class="outgoing_msg">
+            <div class="sent_msg">
+              <p>{{ message.content }}</p>
+              <mat-icon *ngIf="message.seen">check</mat-icon>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+      <h5 *ngIf="isTyping">the other person is typing</h5>
+    </div>
+    <div class="type_msg">
+      <form class="input_msg_write" (ngSubmit)="sendMessage()">
+        <input
+          type="text"
+          class="write_msg"
+          placeholder="Type a message"
+          name="newMessage"
+          [(ngModel)]="newMessage"
+          (keyup)="onTyping()"
+        />
+        <button mat-raised-button > Send </button>
+      </form>
+    </div>

@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="form-component">
+    <h1> New Device</h1>
+    <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm)">
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput  name="description" ngModel></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput type="text" name="address" ngModel>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Max Hour Consumption</mat-label>
+            <input matInput type="number" name="maxHourConsumtion" ngModel>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Client Id</mat-label>
+            <input matInput type="number" name="userId" ngModel>
+        </mat-form-field>
+        <button mat-raised-button type="submit" color="primary">Create</button>
+    </form> 
+    <div *ngIf="showMessage">
+        <h2 class="errorDisplay">Unknown client id</h2>
+    </div>
+</div>

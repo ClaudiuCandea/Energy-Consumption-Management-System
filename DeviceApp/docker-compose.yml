@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  device_app:
+    container_name: device_app
+    image: candea/device_app:1.0.0
+    build: .
+    ports:
+      - "8081:8081"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://device_db:5432/ElectricaDevice
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=12345
+    depends_on:
+      - device_db
+    networks:
+      - my-network
+
+  device_db:
+    container_name: device_db
+    image: postgres:16
+    ports:
+      - "5433:5432"
+    environment:
+      PG_USER: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "12345"
+      POSTGRES_DB: ElectricaDevice
+    volumes:
+      - pgdata:/var/lib/postgresql/data2
+    networks:
+      - my-network
+
+volumes:
+  pgdata: {}
+networks:
+  my-network:
+    external: true

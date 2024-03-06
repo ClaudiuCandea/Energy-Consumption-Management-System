@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  monitoring_app:
+    container_name: monitoring_app
+    image: candea/monitoring_app:1.0.0
+    build: .
+    ports:
+      - "8082:8082"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://monitoring_db:5432/ElectricaMonitoring
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=12345
+    depends_on:
+      - monitoring_db
+    networks:
+      - my-network
+
+  monitoring_db:
+    container_name: monitoring_db
+    image: postgres:16
+    ports:
+      - "5434:5432"
+    environment:
+      PG_USER: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "12345"
+      POSTGRES_DB: ElectricaMonitoring
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - my-network
+
+
+volumes:
+  pgdata: {}
+
+networks:
+  my-network:
+    external: true
